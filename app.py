@@ -42,9 +42,11 @@ def delete(todo_id):
 if __name__ == "__main__":
     db.create_all()
     
-    #create a todo
+    #create a todo test
     # new_item = Todo(title="first task",complete=False)
     # db.session.add(new_item)
     # db.session.commit()
+    # . venv/bin/activate
+    #python app.py
     
     app.run(debug=True)

@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do</title>
 </head>
+
 <body>
     <h1>Todo App</h1>
 
@@ -17,20 +19,26 @@
         </div>
     </form>
 
+    <h3>Not completed</h3>
     {% for todo in todos %}
-        <p>{{todo.id}} "---" {{todo.title}}</p>
-        {% if todo.complete == False %}
-            <span>Not complete</span>
-        {% else %}
-            <span>Completed</span>
-        {% endif %}
-
-
-        <button> <a href='/delete/{{todo.id}}'>Delete</a></button>
-        <button><a href="/complete/{{todo.id}}">Complete</a></button>
-        
-
+    {% if todo.complete == False %}
+    <p>{{todo.id}}.{{todo.title}}</p>
+    <span>Not complete</span>
+    <button> <a href='/delete/{{todo.id}}'>Delete</a></button>
+    <button><a href="/complete/{{todo.id}}">Complete</a></button>
+    {% endif %}
     {% endfor%}
 
+    
+    <h3>Completed</h3>
+    {% for todo in todos %}
+    {% if todo.complete == True %}
+    <p>{{todo.title}}</p>
+    <button> <a href='/delete/{{todo.id}}'>Delete</a></button>
+    <button><a href="/complete/{{todo.id}}">Not complete</a></button>
+    {% endif %}
+    {% endfor %}
+
 </body>
+
 </html>
