@@ -1,15 +1,10 @@
-from flask import Flask, render_template,request, redirect, url_for
-from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, render_template,request, redirect, url_for, jsonify
+from models import db, Todo
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] ='sqlite:///db.sqlite'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
-
-class Todo(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(100))
-    complete = db.Column(db.Boolean)
+db.init_app(app)
 
 @app.route('/', methods=['GET'])
 def index():
@@ -40,7 +35,8 @@ def delete(todo_id):
     
 
 if __name__ == "__main__":
-    db.create_all()
+    with app.app_context():
+        db.create_all()
     
     #create a todo test
     # new_item = Todo(title="first task",complete=False)
